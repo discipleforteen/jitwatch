@@ -16,3 +16,8 @@ mysql -uroot -p -S /home/kzx-ww-it32369/software/mysql/mysql.sock
 
 ./bin/mysqld --defaults-file=my.cnf & 
 
+nohup hive --service metastore &
+
+nohup hive --service hiveserver2 --hiveconf hive.server2.thrift.port 10001  &
+
+nohup hive --service hiveserver2 &
