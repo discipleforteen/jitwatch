@@ -11,7 +11,6 @@ OLAP - Kylin,Presto,Druid,Impala,Clickhouse,Phoenix,Kudu,Doris
 Double Mysql
 
 Mysql password: sjGjuKjL*0ty
-
 mysql -uroot -p -S /home/kzx-ww-it32369/software/mysql/mysql.sock
+./bin/mysqld --defaults-file=my.cnf &
 
-./bin/mysqld --defaults-file=my.cnf start
