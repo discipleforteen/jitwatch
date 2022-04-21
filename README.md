@@ -9,6 +9,9 @@ OLAP - Kylin,Presto,Druid,Impala,Clickhouse,Phoenix,Kudu,Doris
 数据挖掘，深度学习算法
 
 Double Mysql
+
 Mysql password: sjGjuKjL*0ty
+
 mysql -uroot -p -S /home/kzx-ww-it32369/software/mysql/mysql.sock
+
 ./bin/mysqld --defaults-file=my.cnf start
