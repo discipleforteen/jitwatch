@@ -39,3 +39,7 @@ kubectl edit deployment kubernetes-dashboard -n kubernetes-dashboard
 kubectl patch deployment kubernetes-dashboard -n kubernetes-dashboard --type 'json' -p '[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-skip-login"}]'
 
 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+ - --enable-skip-login
+          - --disable-settings-authorizer        
+          - --auto-generate-certificates
