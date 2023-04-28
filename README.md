@@ -3,34 +3,44 @@ Double Mysql
 
 Mysql password: sjGjuKjL*0ty 
 
-mysql -uroot -p -S /home/kzx-ww-it32369/software/mysql/mysql.sock 
+ssh zhoukun@10.100.165.127
 
-./bin/mysqld --defaults-file=my.cnf & 
+export HADOOP_HOME=/home/zhoukun/hadoop-3.1.1
+export PATH=$HADOOP_HOME/bin:$PATH  
+export JAVA_HOME=/home/zhoukun/jdk8
+export PATH=$JAVA_HOME/bin:$PATH
 
-nohup hive --service metastore &
+cd /home/zhoukun/hadoop-3.1.1/sbin/start-all.sh
+sbin/start-all.sh
+sbin/stop-all.sh
 
-nohup hive --service hiveserver2 --hiveconf hive.server2.thrift.port 10001  &
+ssh zhoukun@10.100.165.127
 
-nohup hive --service hiveserver2 &
+/home/zhoukun/hadoop-3.1.1/sbin/start-all.sh
+/home/zhoukun/hadoop-3.1.1/sbin/stop-all.sh
 
-K8S
+cd /home/zhoukun/hadoop-3.1.1/etc/hadoop
+cd /home/zhoukun/hadoop-3.1.1/share/hadoop/mapreduce
+cd /home/zhoukun/hadoop-3.1.1/logs
 
-spec:
-  template:
-    spec:
-      containers:
-      - args:
-        - --auto-generate-certificates
-        - --namespace=kubernetes-dashboard
-        - --enable-skip-login                 # add this argument
-        image: kubernetesui/dashboard:v2.2.0
-        
-kubectl edit deployment kubernetes-dashboard -n kubernetes-dashboard
+hadoop jar hadoop-mapreduce-examples-3.1.1.jar pi 1 1
+hive --service metastore -p 9083 &
+hive --service hiveserver2 &
+jps |cut -d ' ' -f 1|xargs kill -9
 
-kubectl patch deployment kubernetes-dashboard -n kubernetes-dashboard --type 'json' -p '[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-skip-login"}]'
 
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+beeline -u jdbc:hive2://10.100.165.127:10000 -n zhoukun
 
- - --enable-skip-login
-          - --disable-settings-authorizer        
-          - --auto-generate-certificates
+hdfs - http://10.100.165.127:9870
+hiveweb - http://10.100.165.127:10002
+yarn - http://10.100.165.127:8088
+
+mysql -uhive -pHive@2022
+mysql -uroot -pAbcde@2022
+
+Server IP: 81.70.206.69
+IPsec PSK: G4Z7EDp6RNrSAno2pZa4
+Username: vpnuser
+Password: m4z9xBM3WFoNSiNq
+
+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
